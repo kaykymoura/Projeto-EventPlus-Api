@@ -22,6 +22,7 @@
         ],
         "summary": "Endpoint para cadastrar Comentarios",
         "requestBody": {
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -55,6 +56,7 @@
           {
             "name": "id",
             "in": "query",
+            "description": "",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -321,19 +323,9 @@
       }
     },
     "/api/PresencasEventos": {
-      "put": {
+      "post": {
         "tags": [
           "PresencasEventos"
-        ],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
         ],
         "requestBody": {
           "content": {
@@ -371,14 +363,54 @@
         }
       }
     },
-    "/api/PresencasEventos/{Id}": {
+    "/api/PresencasEventos/{id}": {
+      "put": {
+        "tags": [
+          "PresencasEventos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PresencasEventos"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PresencasEventos"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PresencasEventos"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "PresencasEventos"
         ],
         "parameters": [
           {
-            "name": "Id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -394,14 +426,14 @@
         }
       }
     },
-    "/api/PresencasEventos/ListarMinhas/{Id}": {
+    "/api/PresencasEventos/ListarMinhas/{id}": {
       "get": {
         "tags": [
           "PresencasEventos"
         ],
         "parameters": [
           {
-            "name": "Id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -424,7 +456,7 @@
         ],
         "parameters": [
           {
-            "name": "Id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {

@@ -8,13 +8,14 @@
             <summary>
             Endpoint para cadastrar Comentarios
             </summary>
-            <param name="novoFeedback"></param>
+            <param name="comentarioEvento"></param>
             <returns></returns>
         </member>
         <member name="M:webapi.event_.Controllers.ComentariosEventosController.Get(System.Guid)">
             <summary>
             Endpoint para listar Comentarios
             </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:webapi.event_.Controllers.ComentariosEventosController.Delete(System.Guid)">

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using webapi.event_.Domains;
 using webapi.event_.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace webapi.event_.Controllers
 {
@@ -16,28 +18,45 @@ namespace webapi.event_.Controllers
             _presencasRepository = presencasRepository;
         }
 
-        [HttpPut]
-
-
-        public IActionResult Put(Guid Id, PresencasEventos presencas)
+        // POST: api/presencaseventos
+        [HttpPost]
+        public IActionResult Post(PresencasEventos presencas)
         {
             try
             {
-                _presencasRepository.Atualizar(Id, presencas);
+                // Chama o repositório para adicionar a nova presença no evento
+                _presencasRepository.Inscrever(presencas);
+                // Retorna o status 201 (Created) com a URL do novo recurso
+                return CreatedAtAction(nameof(GetById), new { id = presencas.IdPresencaEvento }, presencas);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        // PUT: api/presencaseventos/{id}
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, PresencasEventos presencas)
+        {
+            try
+            {
+                _presencasRepository.Atualizar(id, presencas);
                 return NoContent();
             }
             catch (Exception)
             {
-                throw;
+                return BadRequest("Erro ao atualizar presença");
             }
         }
 
-        [HttpDelete("{Id}")]
-        public IActionResult Delete(Guid Id)
+        // DELETE: api/presencaseventos/{id}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
         {
             try
             {
-                _presencasRepository.Deletar(Id);
+                _presencasRepository.Deletar(id);
                 return NoContent();
             }
             catch (Exception e)
@@ -46,6 +65,7 @@ namespace webapi.event_.Controllers
             }
         }
 
+        // GET: api/presencaseventos
         [HttpGet]
         public IActionResult Get()
         {
@@ -56,35 +76,34 @@ namespace webapi.event_.Controllers
             }
             catch (Exception)
             {
-
-                throw;
+                return BadRequest("Erro ao listar presenças");
             }
         }
 
-        [HttpGet("ListarMinhas/{Id}")]
-        public IActionResult Get(Guid Id)
+        // GET: api/presencaseventos/ListarMinhas/{id}
+        [HttpGet("ListarMinhas/{id}")]
+        public IActionResult Get(Guid id)
         {
             try
             {
-                List<PresencasEventos> ListaMinhas = _presencasRepository.ListarMinhas(Id);
+                List<PresencasEventos> ListaMinhas = _presencasRepository.ListarMinhas(id);
                 return Ok(ListaMinhas);
             }
             catch (Exception)
             {
-                throw;
+                return BadRequest("Erro ao listar presenças do usuário");
             }
         }
 
+        // GET: api/presencaseventos/BuscarPorId/{id}
         [HttpGet("BuscarPorId/{id}")]
-        public IActionResult GetById(Guid Id)
+        public IActionResult GetById(Guid id)
         {
             try
             {
-                PresencasEventos presencaBuscada = _presencasRepository.BuscarPorId(Id);
-
+                PresencasEventos presencaBuscada = _presencasRepository.BuscarPorId(id);
                 return Ok(presencaBuscada);
             }
-
             catch (Exception e)
             {
                 return BadRequest(e.Message);

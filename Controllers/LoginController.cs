@@ -44,8 +44,8 @@ namespace webapi.event_.Controllers
                 {
                     new Claim(JwtRegisteredClaimNames.Jti,usuarioBuscado.IdUsuario.ToString()),
                     new Claim(JwtRegisteredClaimNames.Email,usuarioBuscado.Email!),
+                    new Claim("Tipo do usuario" , usuarioBuscado.TipoUsuario!.TituloTipoUsuario!),
                     
-
                     //podemos definir uma claim personalizada
                     new Claim(" Claim Personalizada ","Valor da Claim Personalizada")
                 };

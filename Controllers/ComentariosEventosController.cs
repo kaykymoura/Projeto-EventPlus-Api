@@ -9,7 +9,6 @@ namespace webapi.event_.Controllers
     [ApiController]
     public class ComentariosEventosController : ControllerBase
     {
-
         private readonly IComentariosEventosRepository _comentariosEventosRepository;
 
         public ComentariosEventosController(IComentariosEventosRepository comentariosEventosRepository)
@@ -20,7 +19,7 @@ namespace webapi.event_.Controllers
         /// <summary>
         /// Endpoint para cadastrar Comentarios
         /// </summary>
-        /// <param name="novoFeedback"></param>
+        /// <param name="comentarioEvento"></param>
         /// <returns></returns>
         [HttpPost]
         public IActionResult Post(ComentariosEventos comentarioEvento)
@@ -28,35 +27,38 @@ namespace webapi.event_.Controllers
             try
             {
                 _comentariosEventosRepository.Cadastrar(comentarioEvento);
-                return Created();
+                // Melhor prática REST: Retornar status 201 com a URL do recurso criado
+                return CreatedAtAction(nameof(GetById), new { UsuarioId = comentarioEvento.IdUsuario, EventoId = comentarioEvento.IdEvento }, comentarioEvento);
             }
             catch (Exception e)
             {
-
-                return BadRequest(e.Message);
+                // Retornar erro detalhado para depuração
+                return BadRequest($"Erro ao cadastrar comentário: {e.Message}");
             }
-
         }
 
         /// <summary>
         /// Endpoint para listar Comentarios
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
         public IActionResult Get(Guid id)
         {
             try
             {
-                List<ComentariosEventos> Listar = _comentariosEventosRepository.Listar(id);
+                List<ComentariosEventos> comentarios = _comentariosEventosRepository.Listar(id);
+                if (comentarios == null || comentarios.Count == 0)
+                {
+                    return NotFound("Nenhum comentário encontrado.");
+                }
 
-                return Ok(Listar);
+                return Ok(comentarios);
             }
             catch (Exception e)
             {
-
-                return BadRequest(e.Message);
+                return BadRequest($"Erro ao listar comentários: {e.Message}");
             }
-
         }
 
         /// <summary>
@@ -69,12 +71,13 @@ namespace webapi.event_.Controllers
         {
             try
             {
+                // Alteração: O método Deletar agora não retorna nada, então não capturamos um valor booleano
                 _comentariosEventosRepository.Deletar(id);
-                return NoContent();
+                return NoContent(); // 204 - Sucesso sem conteúdo
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                return BadRequest($"Erro ao deletar comentário: {e.Message}");
             }
         }
 
@@ -89,13 +92,17 @@ namespace webapi.event_.Controllers
         {
             try
             {
-                ComentariosEventos novoFeedback = _comentariosEventosRepository.BuscarPorIdUsuario(UsuarioId, EventoId);
-                return Ok(novoFeedback);
-            }
-            catch (Exception error)
-            {
+                ComentariosEventos comentario = _comentariosEventosRepository.BuscarPorIdUsuario(UsuarioId, EventoId);
+                if (comentario == null)
+                {
+                    return NotFound($"Comentário não encontrado para o usuário {UsuarioId} e o evento {EventoId}.");
+                }
 
-                return BadRequest(error.Message);
+                return Ok(comentario);
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Erro ao buscar comentário: {e.Message}");
             }
         }
     }
