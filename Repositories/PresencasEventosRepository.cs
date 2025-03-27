@@ -6,9 +6,9 @@ namespace webapi.event_.Repositories
 {
     public class PresencasEventosRepository : IPresencasEventosRepository
     {
-        private readonly Context _context;
+        private readonly Event_Context _context;
 
-        public PresencasEventosRepository(Context context)
+        public PresencasEventosRepository(Event_Context context)
         {
             _context = context;
         }

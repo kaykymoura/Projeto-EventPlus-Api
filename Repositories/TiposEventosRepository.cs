@@ -7,9 +7,9 @@ namespace webapi.event_.Repositories
     public class TiposEventosRepository : ITiposEventosRepository
     {
 
-        private readonly Context _context;
+        private readonly Event_Context _context;
 
-        public TiposEventosRepository(Context context)
+        public TiposEventosRepository(Event_Context context)
         {
             _context = context;
         }

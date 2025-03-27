@@ -1,14 +1,15 @@
 ﻿using webapi.event_.Contexts;
 using webapi.event_.Domains;
 using webapi.event_.Interfaces;
+using webapi.event_.Utils;
 
 namespace webapi.event_.Repositories
 {
     public class UsuariosRepository : IUsuarioRepository
     {
-        private readonly Context _context;
+        private readonly Event_Context _context;
 
-        public UsuariosRepository(Context context)
+        public UsuariosRepository(Event_Context context)
         {
             _context = context;
         }
@@ -48,7 +49,7 @@ namespace webapi.event_.Repositories
                 throw;
             }
         }
-        }
+        
 
         public Usuarios BuscarPorId(Guid id)
         {

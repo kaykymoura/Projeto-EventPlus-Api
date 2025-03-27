@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>webapi.event+</name>
+    </assembly>
+    <members>
+        <member name="M:webapi.event_.Controllers.ComentariosEventosController.Post(webapi.event_.Domains.ComentariosEventos)">
+            <summary>
+            Endpoint para cadastrar Comentarios
+            </summary>
+            <param name="novoFeedback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:webapi.event_.Controllers.ComentariosEventosController.Get(System.Guid)">
+            <summary>
+            Endpoint para listar Comentarios
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:webapi.event_.Controllers.ComentariosEventosController.Delete(System.Guid)">
+            <summary>
+            Endpoint para deletar Comentarios
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:webapi.event_.Controllers.ComentariosEventosController.GetById(System.Guid,System.Guid)">
+            <summary>
+            Endpoint para buscar Comentarios por Id dos usuarios
+            </summary>
+            <param name="UsuarioId"></param>
+            <param name="EventoId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:webapi.event_.Controllers.LoginController.Login(webapi.event_.DTO.LoginDTO)">
+            <summary>
+            Endpoint para realizar a autenticação (Login)
+            </summary>
+            <param name="loginDTO">Email e senha do usuário</param>
+            <returns>Token de acesso</returns>
+        </member>
+        <member name="T:webapi.event_.Migrations.Db_EventPlusApi">
+            <inheritdoc />
+        </member>
+        <member name="M:webapi.event_.Migrations.Db_EventPlusApi.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:webapi.event_.Migrations.Db_EventPlusApi.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:webapi.event_.Migrations.Db_EventPlusApi.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

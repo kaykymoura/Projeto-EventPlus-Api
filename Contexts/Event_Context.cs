@@ -3,12 +3,12 @@ using webapi.event_.Domains;
 
 namespace webapi.event_.Contexts
 {
-    public class Context : DbContext
+    public class Event_Context : DbContext
     {
-        public Context()
+        public Event_Context()
         {
         }
-        public Context(DbContextOptions<Context> options)
+        public Event_Context(DbContextOptions<Event_Context> options)
             : base(options)
         {
         }
@@ -32,7 +32,7 @@ namespace webapi.event_.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=ROQUE; Database=event; Integrated Security=True; TrustServerCertificate=true;");
+                optionsBuilder.UseSqlServer("Server =NOTE12-S28\\SQLEXPRESS; Database = webapi.event+; User Id = sa; Pwd = Senai@134; TrustServerCertificate=true;");
             }
         }
     }

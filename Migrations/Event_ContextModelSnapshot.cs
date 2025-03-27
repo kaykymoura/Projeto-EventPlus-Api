@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapi.event_.Contexts;
 
@@ -11,12 +10,10 @@ using webapi.event_.Contexts;
 
 namespace webapi.event_.Migrations
 {
-    [DbContext(typeof(Context))]
-    [Migration("20250325131615_db_v1")]
-    partial class db_v1
+    [DbContext(typeof(Event_Context))]
+    partial class Event_ContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
